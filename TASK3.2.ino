@@ -33,7 +33,7 @@ void setup() {
   
   pinMode(LED, OUTPUT);// seting the LED pin as an output
   sensor.begin(BH1750_TO_GROUND); // initialising BH1750
-  sensor.start();
+
 
   // Connect to Wi-Fi
   while (WiFi.begin(ssid, pass) != WL_CONNECTED) {
@@ -102,6 +102,6 @@ void onLightSensorChange(){
     }
 
     delay(5000);
-    sensor.start();
+    
 }
 }
