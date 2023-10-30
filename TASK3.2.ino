@@ -50,14 +50,7 @@ void loop() {
   delay(5000);
 }
 
-// this function handles the actions when the sunlight is detected
-void onSunlightChange(){
-  digitalWrite(LED, HIGH);
-  delay(2000);
 
-  digitalWrite(LED, LOW);
-  delay(2000);
-}
 
 // this function sends data to IFTTT
 void sendToIFTTT(String value) {
@@ -93,7 +86,6 @@ void onLightSensorChange(){
     {
       // when the sunlight is detected, call the onSunlightChange function and it sends data to IFTTT.
       sunlight = true;
-      onSunlightChange();
       sendToIFTTT("SunlightDetected");
       
       // printing the light intensity 
