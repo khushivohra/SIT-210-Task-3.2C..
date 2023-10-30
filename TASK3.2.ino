@@ -5,8 +5,6 @@
 #include <hp_BH1750.h>
 hp_BH1750 sensor;
 
-//defining a variable for a LED pin.
-int LED = 2;
 
 //adding ssID and password
 char ssid[] = "iPhone";
