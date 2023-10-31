@@ -1,7 +1,7 @@
 //These lines include necessary libraries for working with WiFi and HTTP client.
 #include <SPI.h>
 #include <WiFiNINA.h>
-#include <ArduinoHttpClient.h>
+#include <ArduinoHttpClient.h> // hhtp request leta hai aur aage client ko send krta hai
 #include <hp_BH1750.h>
 hp_BH1750 sensor;
 
@@ -15,10 +15,6 @@ const int IFTTT_PORT = 80;// HTTP port for IFTTT
 const char* IFTTT_EVENT = "Sunlight_detected"; // Event name on IFTTT
  const char* IFTTT_KEY = "cIwj2kLeJMoYdVWejIU-2d7OtImQa76fklTWyHarOH";//IFTTT webhook key
 
-// defining analog pins connected to BH1750
-const int SCLpin = A5;
-const int SDApin = A4;
-
 // Light level threshold
 const int threshold = 500;
 
@@ -27,10 +23,10 @@ WiFiClient wifiClient;
 HttpClient client = HttpClient(wifiClient, IFTTT_HOST, IFTTT_PORT);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600); // shows serial monitor
   delay(2000);
 
-  sensor.begin(BH1750_TO_GROUND); // initialising BH1750
+  sensor.begin(BH1750_TO_GROUND); // initialising BH1750 , 
 
   // Connect to Wi-Fi
   while (WiFi.begin(ssid, pass) != WL_CONNECTED) {
@@ -76,11 +72,10 @@ void onLightSensorChange(){
   if (sensor.hasValue())
   {
     float lightSensor = sensor.getLux();
-    bool sunlight;
     if (lightSensor > 500)
     {
       // when the sunlight is detected, call the onSunlightChange function and it sends data to IFTTT.
-      sunlight = true;
+     
       sendToIFTTT("SunlightDetected");
       
       // printing the light intensity 
