@@ -5,7 +5,6 @@
 #include <hp_BH1750.h>
 hp_BH1750 sensor;
 
-
 //adding ssID and password
 char ssid[] = "iPhone";
 char pass[] = "qazxcvbnm123";
@@ -91,7 +90,7 @@ void onLightSensorChange(){
     }
     else
     {
-      // when no sunlight is detected, turn off the LED and print the light intensity
+      // when no sunlight is detected, print the light intensity
       sunlight = false;
       Serial.print("Light Intensity: ");
       Serial.print(lightSensor);
