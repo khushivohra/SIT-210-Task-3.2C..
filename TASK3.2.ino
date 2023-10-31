@@ -30,10 +30,8 @@ HttpClient client = HttpClient(wifiClient, IFTTT_HOST, IFTTT_PORT);
 void setup() {
   Serial.begin(9600);
   delay(2000);
-  
-  pinMode(LED, OUTPUT);// seting the LED pin as an output
-  sensor.begin(BH1750_TO_GROUND); // initialising BH1750
 
+  sensor.begin(BH1750_TO_GROUND); // initialising BH1750
 
   // Connect to Wi-Fi
   while (WiFi.begin(ssid, pass) != WL_CONNECTED) {
@@ -56,11 +54,11 @@ void sendToIFTTT(String value) {
   String url = "/trigger/light sensor/with/key/cIwj2kLeJMoYdVWejIU-2d7OtImQa76fklTWyHarOH"; 
   String json = "{\"value1\":\"" + value + "\"}";
 
-  client.beginRequest();
-  client.post(url);
-  client.sendHeader("Content-Type", "application/json");
-  client.sendHeader("Content-Length", json.length());
-  client.beginBody();
+  client.beginRequest(); // This function initiates the HTTP request using the client object
+  client.post(url); // The client will send the request to this URL.
+  client.sendHeader("Content-Type", "application/json"); // indicates that the request body will be in JSON format by setting the "Content-Type" header to "application/json."
+  client.sendHeader("Content-Length", json.length()); // informs the server of the length of the data being sent in the request.
+  client.beginBody(); // starts HTTP request body.
   client.print(json);
   client.endRequest();
 
@@ -80,7 +78,7 @@ void onLightSensorChange(){
   {
     float lightSensor = sensor.getLux();
     bool sunlight;
-    if (lightSensor > 400)
+    if (lightSensor > 500)
     {
       // when the sunlight is detected, call the onSunlightChange function and it sends data to IFTTT.
       sunlight = true;
@@ -95,7 +93,6 @@ void onLightSensorChange(){
     {
       // when no sunlight is detected, turn off the LED and print the light intensity
       sunlight = false;
-      digitalWrite(LED, LOW);
       Serial.print("Light Intensity: ");
       Serial.print(lightSensor);
       Serial.println(", Sunlight: OFF");
