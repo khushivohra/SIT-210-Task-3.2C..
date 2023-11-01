@@ -1,7 +1,7 @@
 //These lines include necessary libraries for working with WiFi and HTTP client.
 #include <SPI.h>
 #include <WiFiNINA.h>
-#include <ArduinoHttpClient.h> // hhtp request leta hai aur aage client ko send krta hai
+#include <ArduinoHttpClient.h> // takes hhtp request and send it to the client
 #include <hp_BH1750.h>
 hp_BH1750 sensor;
 
@@ -26,7 +26,7 @@ void setup() {
   Serial.begin(9600); // shows serial monitor
   delay(2000);
 
-  sensor.begin(BH1750_TO_GROUND); // initialising BH1750 , 
+  sensor.begin(BH1750_TO_GROUND); // initialising BH1750 
 
   // Connect to Wi-Fi
   while (WiFi.begin(ssid, pass) != WL_CONNECTED) {
